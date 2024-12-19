@@ -1,0 +1,91 @@
+[gd_scene load_steps=9 format=3 uid="uid://8u7aqod1suk"]
+
+[ext_resource type="Script" path="res://Scripts/game_manager.gd" id="1_qcp3t"]
+[ext_resource type="Texture2D" uid="uid://c0fhlsthiy8ej" path="res://Assets/Backgrounds/Preview 3.png" id="1_tf0nb"]
+[ext_resource type="PackedScene" uid="uid://din80hbue80ms" path="res://stairs.tscn" id="2_g2dg5"]
+[ext_resource type="FontFile" uid="uid://dnbwyv0pwuoha" path="res://Assets/Fonts/SummerPixel22Regular-jE0W7.ttf" id="2_nh8jk"]
+[ext_resource type="PackedScene" uid="uid://7j6jvnxec3j0" path="res://princess.tscn" id="3_5lfjt"]
+[ext_resource type="PackedScene" uid="uid://cv5j5m1tavas" path="res://upStairs.tscn" id="4_t70sn"]
+[ext_resource type="PackedScene" uid="uid://cnrwwsmciwlnx" path="res://gem.tscn" id="5_q22jb"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1hcha"]
+
+[node name="Game" type="Node2D"]
+
+[node name="GameManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_qcp3t")
+
+[node name="Score" type="Label" parent="GameManager"]
+modulate = Color(0.980392, 0.603922, 0.807843, 1)
+self_modulate = Color(0.988235, 0.898039, 0.945098, 1)
+z_index = 1
+offset_left = 306.0
+offset_top = 96.0
+offset_right = 399.075
+offset_bottom = 136.0
+scale = Vector2(5.4267, 6.54522)
+pivot_offset = Vector2(64.3116, 13.5977)
+theme_override_fonts/font = ExtResource("2_nh8jk")
+theme_override_font_sizes/font_size = 13
+text = "Score: 0"
+autowrap_mode = 2
+
+[node name="Scenery" type="Node" parent="."]
+
+[node name="Background" type="Sprite2D" parent="Scenery"]
+z_index = -1
+position = Vector2(571, 286)
+scale = Vector2(0.580247, 0.580247)
+texture = ExtResource("1_tf0nb")
+
+[node name="Ground" type="StaticBody2D" parent="Scenery"]
+position = Vector2(0, 625)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Scenery/Ground"]
+visible = false
+shape = SubResource("WorldBoundaryShape2D_1hcha")
+
+[node name="Stairs" type="Node" parent="."]
+
+[node name="Stairs" parent="Stairs" instance=ExtResource("2_g2dg5")]
+position = Vector2(1084, 619)
+scale = Vector2(3, 3)
+
+[node name="UpStairs" parent="Stairs" instance=ExtResource("4_t70sn")]
+position = Vector2(1084, 626)
+scale = Vector2(3, 3)
+
+[node name="Stairs2" parent="Stairs" instance=ExtResource("2_g2dg5")]
+position = Vector2(107, 619)
+scale = Vector2(3, 3)
+
+[node name="UpStairs2" parent="Stairs" instance=ExtResource("4_t70sn")]
+position = Vector2(107, 626)
+scale = Vector2(3, 3)
+
+[node name="Gems" type="Node" parent="."]
+
+[node name="Gem" parent="Gems" instance=ExtResource("5_q22jb")]
+position = Vector2(202, -151)
+
+[node name="Gem2" parent="Gems" instance=ExtResource("5_q22jb")]
+position = Vector2(467, -154)
+
+[node name="Gem3" parent="Gems" instance=ExtResource("5_q22jb")]
+position = Vector2(718, -157)
+
+[node name="Gem4" parent="Gems" instance=ExtResource("5_q22jb")]
+position = Vector2(981, -160)
+
+[node name="Player" type="Node" parent="."]
+
+[node name="Princess" parent="Player" instance=ExtResource("3_5lfjt")]
+z_index = 1
+position = Vector2(258, 612)
+scale = Vector2(3, 3)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(577, 323)
+
+[node name="Labels" type="Node" parent="."]
